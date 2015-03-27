@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe ProductsController do
   let(:category)      { create(:category) }
+  let(:invalid_value) { nil }
   let(:valid_attributes) do
     {
       title: 'MyString',
@@ -152,7 +153,7 @@ describe ProductsController do
 
           it "re-renders the 'new' template" do
             Product.any_instance.stub(:save).and_return(false)
-            post :create, { product: { 'title' => 'invalid value' }, category_id: category.to_param }
+            post :create, { product: { 'title' => 'invalid_value' }, category_id: category.to_param }
             expect(response).to render_template('new')
           end
         end
@@ -240,5 +241,4 @@ describe ProductsController do
       end
     end
   end
-
 end

@@ -1,4 +1,11 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+.panel.panel-primary
+  .panel-heading
+    .btn-primary
+      Rating
+      .badge= review.rating
+  .panel-body
+    %p= review.content
+    %em.author.pull-right
+      \-
+      = review.author
+    

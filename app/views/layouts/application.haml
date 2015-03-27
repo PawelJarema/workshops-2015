@@ -9,12 +9,44 @@
     = javascript_include_tag 'application'
 
   %body
-    %nav.navbar.navbar-default
+    -if flash[:notice]
+      %div.alert.alert-success.alert-dismissible
+        %button.close{:'data-dismiss' => 'alert', :'aria-label' => 'close'}
+          %span
+            &times;
+        =flash[:notice]
+    -if flash[:error]
+      %div.alert.alert-danger.alert-dismissible
+        %button.close{:'data-dismiss' => 'alert', :'aria-label' => 'close'}
+          %span
+            &times;
+        =flash[:error] 
+    %nav.navbar-static-top.navbar-inverse.navbar-default
       .container-fluid
         .navbar-header
-          %span.navbar-brand #{AppConfig.workshops_name}
+          %span.navbar-brand 
+            %span.glyphicon.glyphicon-apple
+            #{AppConfig.workshops_name}
+        %ul.nav.navbar-nav
+          %li
+            =link_to 'Categories', root_path
+          %li
+            =link_to 'All Products', category_products_path(Category.first)
         %p.navbar-text.navbar-right
-          Links should go here
+          -unless user_signed_in?
+            %span
+              =link_to 'Log in', new_user_session_path   
+            %span
+              |
+              =link_to 'Sign up', new_user_registration_path
+          -else
+            %span
+              ="Welcome #{ current_user.firstname } #{ current_user.lastname }: "
+            %span
+              =link_to "Profile", profile_edit_path
+              |
+            %span
+              =link_to 'Log out', destroy_user_session_path, method: :delete
     .container-fluid
       .row
         .col-lg-12

@@ -1,17 +1,26 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = category.name
-
-%p
-  - category.products.each do |product|
-    = product.title
-
-%p
-  %h3 New product
-  = render 'products/form'
-
-= link_to 'Edit', edit_category_path(category)
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+%h1.center
+  .label.label-default= category.name
+%br
+.row
+  .col-md-6
+    %h1.center Add New Product
+    -if user_signed_in? and current_user.admin?
+      .span.center
+        = link_to 'Edit', edit_category_path(category)
+        \|
+        = link_to 'Back', categories_path
+    .col-md-2
+    .col-md-8
+      = render 'products/form'
+  .col-md-6
+    %br
+    %br
+    %br
+    - category.products.each do |product|
+      = link_to category_product_path(product.category, product) do 
+        %div.center{ :style => "display: inline-block;" }
+          .label.label-default
+            =product.title
+          %div{ :style => "display: block; background: #eee; width: 90px; height: 90px;" }
+        
+    

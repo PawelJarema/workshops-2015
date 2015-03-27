@@ -1,7 +1,14 @@
-%h1 Editing product
-
-= render 'form'
-
-= link_to 'Show', category_product_path(category, product)
-\|
-= link_to 'Back', category_path(category)
+.row
+  .col-md-4
+  .col-md-4
+    %h1.center Editing product
+    .center
+      = link_to 'Show', category_product_path(category, product)
+      -if current_user.admin?
+        \|
+        = link_to 'Back', category_path(category)
+.row
+  .col-md-4
+  .col-md-4
+    = render 'form'
+  

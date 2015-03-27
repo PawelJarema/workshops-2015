@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :kik_to_login, only: [:create, :update, :destroy]
+
   expose(:category)
   expose(:products)
   expose(:product)
@@ -14,7 +16,11 @@ class ProductsController < ApplicationController
   def new
   end
 
-  def edit
+  def edit   
+    if product.user != current_user
+      flash[:error] = 'You are not allowed to edit this product.'
+      redirect_to category_product_url(category, product)
+    end
   end
 
   def create
@@ -29,10 +35,15 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if self.product.update(product_params)
-      redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
+    if product.user != current_user
+      flash[:error] = 'You are not allowed to edit this product.'
+      redirect_to category_product_url(category, product)
     else
-      render action: 'edit'
+      if self.product.update(product_params)
+        redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
+      else
+        render action: 'edit'
+      end
     end
   end
 
@@ -43,8 +54,11 @@ class ProductsController < ApplicationController
   end
 
   private
+    def product_params
+      params.require(:product).permit(:title, :description, :price, :category_id)
+    end
 
-  def product_params
-    params.require(:product).permit(:title, :description, :price, :category_id)
-  end
+    def kik_to_login
+      redirect_to new_user_session_path unless user_signed_in?
+    end
 end

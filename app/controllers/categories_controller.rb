@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
-  
+  before_action :kik_to_login, only: [:new, :create, :edit, :update]
+
   expose(:categories)
   expose(:category)
   expose(:product) { Product.new }

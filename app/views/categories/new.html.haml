@@ -1,5 +1,10 @@
-%h1 New category
+%br
+%h1.center New category
+%div.center
+  = link_to 'Back', categories_path
+.row
+  .col-md-4
+  .col-md-4
+    = render 'form'
 
-= render 'form'
 
-= link_to 'Back', categories_path, class: 'btn btn-primary'
