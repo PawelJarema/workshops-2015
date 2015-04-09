@@ -28,24 +28,22 @@
             %span.glyphicon.glyphicon-apple
             #{AppConfig.workshops_name}
         %ul.nav.navbar-nav
-          %li
+          %li{ :class => "#{ controller_name == 'categories' ? 'active' : '' }" }
             =link_to 'Categories', root_path
-          %li
+          %li{ :class => "#{ controller_name == 'products' ? 'active' : '' }" }
             =link_to 'All Products', category_products_path(Category.first)
         %p.navbar-text.navbar-right
           -unless user_signed_in?
-            %span
+            %span.nav-link
               =link_to 'Sign in', new_user_session_path   
-            %span
-              |
+            %span.nav-link
               =link_to 'Sign up', new_user_registration_path
           -else
-            %span
-              ="Welcome #{ current_user.firstname } #{ current_user.lastname }: "
-            %span
+            %span.nav-link
+              ="Welcome #{ current_user.firstname } #{ current_user.lastname }!"
+            %span.nav-link
               =link_to "Profile", profile_edit_path
-              |
-            %span
+            %span.nav-link
               =link_to 'Log out', destroy_user_session_path, method: :delete
     .container-fluid
       .row

@@ -18,9 +18,10 @@
     %br
     - category.products.each do |product|
       = link_to category_product_path(product.category, product) do 
-        %div.center{ :style => "display: inline-block;" }
+        .inline
           .label.label-default
-            =product.title
-          %div{ :style => "display: block; background: #eee; width: 90px; height: 90px;" }
+            = product.title
+          .product-img-container.w90h90
+            = image_tag product.image_name
         
     

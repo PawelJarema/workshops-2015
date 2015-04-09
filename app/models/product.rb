@@ -17,6 +17,10 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def image_name
+    "#{ title.downcase.gsub(' ', '') }.png"
+  end
+
   def price_tag
     "$#{price}"
   end

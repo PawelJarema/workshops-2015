@@ -1,13 +1,12 @@
 %h2.center Sign up
 .center
   = render "devise/shared/links"
-
+  
 .row
   .col-md-4
   .col-md-4
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = f.error_notification
-      = debug resource.errors
       .form-inputs
         = f.input :firstname, required: true, autofocus: true
         = f.input :lastname, required: true, autofocus: true

@@ -1,15 +1,15 @@
 %br
-%h1 Listing products
 %br
 %br
 
 %div.container{:style => "display: table"}
   - products.each_slice(4) do |chunk|
-    .row
+    .row.center
       - chunk.each do |product|
-        .col-md-3{ :style => "margin-bottom: 30px" }
+        .col-xs-12.col-sm-6.col-md-3{ :style => "margin-bottom: 30px" }
           .thumbnail{ :style => "max-width: 202px;" }
-            %div{:style => 'background: #eee; width: 192px; height: 200px'}
+            .product-img-container.w192h200
+              = image_tag product.image_name
             .caption
               .info
                 .pull-left= product.price_tag
@@ -18,17 +18,20 @@
               %br
               %h3= product.title
               %p{ :style => "opacity: 0.7" }= product.description
-              %hr
-              = link_to category_product_path(product.category, product) do
-                .btn.btn-primary
-                  Show
               %br
+              %hr
               -if user_signed_in? and current_user == product.user
-                %br
                 = link_to edit_category_product_path(product.category, product) do
                   .btn.btn-default
                     Edit
                 = link_to category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' } do
                   .btn.btn-default
                     Destroy
+                %br
+                %br
+
+              = link_to category_product_path(product.category, product) do
+                .btn.btn-primary
+                  Show
+              %br        
 %br

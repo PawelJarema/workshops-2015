@@ -1,3 +1,20 @@
+.product-img-container {
+	background: #ddd; 
+
+	overflow: hidden;
+	border: 1px solid #ccc;
+
+	img {
+		height: 100%;
+	}
+}
+
+.nav-link {
+	margin-right: 10px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+
 input[type=checkbox] {
 	margin-left: 5px !important;
 }
@@ -15,4 +32,28 @@ input[type=checkbox] {
 .alert {
 	padding: 0;
 	margin: 0 !important;
+}
+
+/* basic modifiers */
+
+.inline {
+	display: inline-block;
+}
+
+.h-300 {
+	height: 300px;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.w192h200 {
+	width: 192px; 
+	height: 200px;
+}
+
+.w90h90 {
+	width: 90px; 
+	height: 90px;
 }
